@@ -1,10 +1,24 @@
-import fs from 'fs'
+import fs, { readdirSync } from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
 
 const postsDirectory = join(process.cwd(), '_posts')
 
+export function getTopics() {
+  return readdirSync(postsDirectory, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dir => dir.name);
+}
+
+export function getSlugsForTopic(topic: string) {
+  const topicDirectory = join(postsDirectory, topic);
+  return fs.readdirSync(topicDirectory);
+}
+
 export function getPostSlugs() {
+  readdirSync(postsDirectory, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .forEach(dir => console.log('isdir', dir));
   return fs.readdirSync(postsDirectory)
 }
 
@@ -29,6 +43,10 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
       items[field] = content
     }
 
+    if (field === 'topic') {
+      items[field] = topic
+    }
+
     if (typeof data[field] !== 'undefined') {
       items[field] = data[field]
     }
@@ -38,6 +56,20 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 }
 
 export function getAllPosts(fields: string[] = []) {
+  const topics = getTopics();
+
+  const postData = [];
+
+  topics.forEach(topic => {
+    const slugs = getSlugsForTopic(topic);
+    const posts =
+      // get all posts for topic
+      // append to post data
+  })
+
+  // add slugPath to getPostBySlug to handle different topics
+
+
   const slugs = getPostSlugs()
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
