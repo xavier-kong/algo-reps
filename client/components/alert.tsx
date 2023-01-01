@@ -16,6 +16,7 @@ const Alert = ({ preview }: Props) => {
     >
       <Container>
         <div className="py-2 text-center text-sm">
+          This text can be edited in components/alert.tsx.{' '}
           {preview ? (
             <>
               This page is a preview.{' '}

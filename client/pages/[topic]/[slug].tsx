@@ -70,7 +70,7 @@ export async function getStaticProps({ params }: Params) {
     'content',
     'ogImage',
     'coverImage',
-  ])
+  ], params.topic);
   const content = await markdownToHtml(post.content || '')
 
   return {
