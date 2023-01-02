@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./components/**/*.tsx', './pages/**/*.tsx'],
+  content: ['./components/**/*.tsx', './pages/**/*.tsx', './src/**/*.{html,js}', './node_modules/tw-elements/dist/js/**/*.js'],
   theme: {
     extend: {
       colors: {
@@ -31,5 +31,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    (require('tw-elements/dist/plugin'))
+  ],
 }
