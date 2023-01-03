@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./components/**/*.tsx', './pages/**/*.tsx', './src/**/*.{html,js}', './node_modules/tw-elements/dist/js/**/*.js'],
+  content: ['./components/**/*.tsx', './pages/**/*.tsx', './src/**/*.{html,js}', './node_modules/tw-elements/dist/js/**/*.js', './public/**/*.html',  "./node_modules/flowbite-react/**/*.js",],
   theme: {
     extend: {
       colors: {
@@ -32,6 +32,6 @@ module.exports = {
     },
   },
   plugins: [
-    (require('tw-elements/dist/plugin'))
+    require('flowbite/plugin')
   ],
 }
