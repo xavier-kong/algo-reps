@@ -91,7 +91,6 @@ export async function getStaticPaths() {
       return {
         params: {
           topic: post.topic,
-          slug: post.slug,
         },
       }
     }),
