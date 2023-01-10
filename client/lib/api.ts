@@ -80,3 +80,22 @@ export function getAllPosts(fields: string[] = []) {
 
   return postData;
 }
+
+interface Question {
+  slug: string,
+    ranking: number
+};
+
+export function getQuestionsByTopic(topic: string): Question[] {
+  const slugs = getSlugsForTopic(topic);
+  const questions = slugs.map((slug) => {
+    const post = getPostBySlug(slug, ['slug', 'ranking'], topic);
+    return {
+      slug: post.slug,
+      ranking: post.ranking ? parseInt(post.ranking) : 0
+    };
+
+  });
+
+  return questions;
+}
