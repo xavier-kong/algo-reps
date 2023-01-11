@@ -5,6 +5,7 @@ import Header from '../../components/header'
 import Layout from '../../components/layout'
 import { getAllPosts, getQuestionsByTopic } from '../../lib/api'
 import PostTitle from '../../components/post-title'
+import { Timeline } from 'flowbite-react';
 
 type Props = {
   questions: Question[]
@@ -15,9 +16,10 @@ interface Question {
     ranking: number
 };
 
-function createCard(question: Question) {
+function createTimelineItem(question: Question) {
   return (
-
+    <Timeline.Item>
+    </Timeline.Item>
   )
 }
 
@@ -34,21 +36,13 @@ export default function Post({ questions }: Props) {
           <PostTitle>Loading…</PostTitle>
         ) : (
          <>
-          <div className="container mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <>
-                {
-                  questions.map((question: Question) => {
-
-                  })
-                }
-
-                </>
-              </div>
-              <br />
-            </div>
-
-
+           <Timeline>
+             {
+               questions
+               .sort((a, b) => (a.ranking - b.ranking))
+               .map((question: Question) => createTimelineItem(question))
+             }
+           </Timeline>
             </>
           )}
         </Container>
