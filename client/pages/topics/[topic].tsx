@@ -7,6 +7,7 @@ import { getAllPosts, getQuestionsByTopic } from '../../lib/api';
 import { convertDashToUpperCase } from '../../lib/helper';
 import PostTitle from '../../components/post-title'
 import { Timeline } from 'flowbite-react';
+import Link from 'next/link';
 
 type Props = {
   questions: Question[];
@@ -14,20 +15,23 @@ type Props = {
 }
 
 interface Question {
-    slug: string,
+    slug: string
     ranking: number
+    topic: string
 };
 
 function createTimelineItem(question: Question) { // https://flowbite-react.com/timeline, also make sure the button + timeline item activates on hover
-
   return (
     <Timeline.Item key={question.ranking}>
         <Timeline.Point />
-        <Timeline.Content>
-          <Timeline.Title>
-            { convertDashToUpperCase(question.slug) }
-          </Timeline.Title>
-        </Timeline.Content>
+
+        <Link href={`/${question.topic}/${question.slug}`}>
+          <Timeline.Content>
+            <Timeline.Title>
+              {convertDashToUpperCase(question.slug)}
+            </Timeline.Title>
+          </Timeline.Content>
+        </Link>
     </Timeline.Item>
   )
 }
@@ -49,7 +53,7 @@ export default function Post({ questions, topic }: Props) {
              {
                questions
                .sort((a, b) => (a.ranking - b.ranking))
-               .map((question: Question) => createTimelineItem(question))
+               .map((question: Question) => createTimelineItem({ ...question, topic }))
              }
            </Timeline>
             </>

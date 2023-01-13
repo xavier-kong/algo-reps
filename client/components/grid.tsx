@@ -7,7 +7,6 @@ type Props = {
   allPosts: Post[]
 }
 
-
 function getTopics(allPosts: Post[]): string[] {
   const topicSet = {};
 
@@ -19,8 +18,6 @@ function getTopics(allPosts: Post[]): string[] {
 
   return Object.keys(topicSet);
 }
-
-
 
 function createCard(topic: string) {
   return (
@@ -38,7 +35,6 @@ function createCard(topic: string) {
     //</div>
   )
 }
-
 
 export default function Grid({ allPosts }: Props) {
   const topics = getTopics(allPosts);
