@@ -22,7 +22,7 @@ function getTopics(allPosts: Post[]): string[] {
 function createCard(topic: string) {
   return (
     //<div className="flex justify-center text-6xl border-2 border-gray-300 rounded-xl p-6 bg-gray-100">
-      <Link href={`/topics/${topic}`} id={topic}>
+      <Link href={`/${topic}`} id={topic}>
         <Card imgSrc={`/assets/topics/${topic}.jpeg`} >
           <h5 className="text-lg md:text-base font-bold tracking-tight text-gray-900 dark:text-white">
             {convertDashToUpperCase(topic)}
