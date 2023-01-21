@@ -11,6 +11,7 @@ import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 import type PostType from '../../interfaces/post'
+import { convertDashToUpperCase } from '../../lib/helper';
 
 type Props = {
   post: PostType
@@ -26,7 +27,7 @@ export default function Post({ post, morePosts, preview }: Props) {
   return (
     <Layout preview={preview}>
       <Container>
-        <Header />
+        <Header text={convertDashToUpperCase(post.title)}/>
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
@@ -34,12 +35,12 @@ export default function Post({ post, morePosts, preview }: Props) {
             <article className="mb-32">
               <Head>
                 <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
+                  {convertDashToUpperCase(post.title)} | Next.js Blog Example with {CMS_NAME}
                 </title>
                 <meta property="og:image" content={post.ogImage.url} />
               </Head>
               <PostHeader
-                title={post.title}
+                title={convertDashToUpperCase(post.title)}
                 coverImage={post.coverImage}
                 date={post.date}
                 author={post.author}
